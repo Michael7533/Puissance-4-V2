@@ -35,7 +35,7 @@ public class Main {
             int sumResult=0;
             int testc = c-(ruleCoins -1); // on veut revenir "rulecoins-1 (3)" colonnes en arrière par rapport au placement du pion du jour
             if (testc<0 ) { testc=0;} //  si le test sort du tableau, on limite aux bornes du tableau
-            for (int i=0 ; i> 2*ruleCoins || i>board1.length|| sumResult =4 ; i++){ // on balaye l'intégralité des cases à tester sous conditions de respect de la longueur du tableau ou bien lorsqu'on a atteint un résultat à 4
+            for (int i=0 ; i< 2*ruleCoins || i< board1.length|| sumResult ==4 ; i++){ // on balaye l'intégralité des cases à tester sous conditions de respect de la longueur du tableau ou bien lorsqu'on a atteint un résultat à 4
             //board1[testc][l] == currentPlayer ? sumResult = sumResult + 1 : sumResult = 0; // on teste chacune des cases et on accumule le résultat si signe identique sinon on remet le résultat à 0
             sumResult= (board1[testc][l] == currentPlayer)? sumResult + 1 : 0;
             }
