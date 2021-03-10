@@ -31,16 +31,32 @@ public class Main {
 
         // Test ligne (fonction)
 
-        private static boolean testligne(int c,  int ruleCoins, int l,char currentPlayer,char[][] board1 ) {
-            int sumResult=0;
-            int testc = c-(ruleCoins -1); // on veut revenir "rulecoins-1 (3)" colonnes en arrière par rapport au placement du pion du jour
-            if (testc<0 ) { testc=0;} //  si le test sort du tableau, on limite aux bornes du tableau
-            for (int i=0 ; i< 2*ruleCoins || i< board1.length|| sumResult ==4 ; i++){ // on balaye l'intégralité des cases à tester sous conditions de respect de la longueur du tableau ou bien lorsqu'on a atteint un résultat à 4
-            //board1[testc][l] == currentPlayer ? sumResult = sumResult + 1 : sumResult = 0; // on teste chacune des cases et on accumule le résultat si signe identique sinon on remet le résultat à 0
-            sumResult= (board1[testc][l] == currentPlayer)? sumResult + 1 : 0;
-            }
-            return sumResult==4;
+    private static boolean testligne(int c,  int ruleCoins, int l,char currentPlayer,char[][] board1 ) {
+        int sumResult = 0;
+        int testc = (c-1) - (ruleCoins - 1); // on veut revenir "rulecoins-1 (3)" colonnes en arrière par rapport au placement du pion du jour
+        if (testc < 0) {
+            testc = 0;
+        } //  si le test sort du tableau, on limite aux bornes du tableau
+
+        System.out.println("coucou je suis bien là");
+
+        for (int i=testc; i< (2 * ruleCoins) -1 && i < ((board1[0].length)) && sumResult < 4  ; i++) { // on balaye l'intégralité des cases à tester sous conditions de respect de la longueur du tableau ou bien lorsqu'on a atteint un résultat à 4
+            sumResult = (board1[l][i] == currentPlayer) ? sumResult + 1 :  0; // on teste chacune des cases et on accumule le résultat si signe identique sinon on remet le résultat à 0
+            //if (sumResult < 5) {sumResult = (board1[l][i] == currentPlayer) ? sumResult + 1 : 0;}
+
+
+            System.out.println("i " + i);
+            System.out.println("c " + c);
+            System.out.println("board legnt " + ((board1[0].length)-1));
+            System.out.println("testc " + testc);
+            System.out.println("l " + l);
+            System.out.println("currentPlayer " + currentPlayer);
+            System.out.println("rulecoins " + ruleCoins);
+            System.out.println("sumresult " + sumResult);
         }
+        System.out.println("coucou je suis bien là aussi");
+        return sumResult == 4;
+    }
         // Test colonne (fonction)
 
         // Test diagonale montante (fonction)
