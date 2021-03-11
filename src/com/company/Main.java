@@ -14,22 +14,84 @@ public class Main {
         int ruleCoins = 4; // nombre de jetons alignés pour victoire
         String player1; // nom du joueur 1
         String player2; // nom du joueur 2
-        char currentPlayer; // joueur dont le tour est en cours
-        boolean win; // True pour victoire, false pour défaite
+        char currentPlayer = 'X'; // joueur dont le tour est en cours
+        boolean win = false; // True pour victoire, false pour défaite
         int sumResult = 0;//Nombre de jetons alignés
-        char[][] board = new char[nbl][nbc]; // tableau du puissance 4
-        int c; // coordonnée colonne du dernier coup joué
-        int l;// coordonnée ligne du dernier coup joué
+        char[][] board= new char[nbl][nbc]; // tableau du puissance 4
+        int c = 0; // coordonnée colonne du dernier coup joué
+        int l = 0;// coordonnée ligne du dernier coup joué
 
-    }
+        // define board game
 
+        for (l = 0; l <= nbl-1; l++) {
+            for (c = 0; c <= nbc-1; c++) {
+                board[l][c] = '-';
+            }
 
+        }
 // Chronologie
-    // demander le nom des players
+        // demander le nom des players
 
-    // demander au jour d'indiquer sa colonne de jeu
+        // demander au jour d'indiquer sa colonne de jeu
+        while (!win) {
+            System.out.println("Joueur suivant: " + currentPlayer + ", dans quelle colonne tu veux mettre le jeton entre 1 et 7:");
+            c = sc.nextInt();
+            sc.nextLine();
 
-    // Mettre le jeton au bon endroit dans la colonne
+            // Mettre le jeton au bon endroit dans la colonne
+
+            l = 0;
+            boolean rempli = false;
+            for (int i = 0; i <= 5 && rempli == false; i++) {
+                if (board[i][c - 1] == '-') {
+                    board[i][c - 1] = currentPlayer;
+                    rempli = true;
+                    l = l + 1;
+                }
+            }
+
+
+            // Victoire ou non ? (si non: changement de joueur)
+            if (testligne(c, ruleCoins, l, currentPlayer, board)) {
+                win = true;}
+
+
+
+            if (testcolonne(c, ruleCoins, l, currentPlayer, board)) {
+                win = true;}
+                System.out.println("winc"+ win);
+
+            if (testdiagonalemontante(c, ruleCoins, l, currentPlayer, board)) {
+                win = true;}
+                System.out.println("winda"+ win);
+
+            if (testdiagonaledescendante(c, ruleCoins, l, currentPlayer, board)) {
+                win = true;}
+                System.out.println("windd"+ win);
+
+
+
+
+
+// afficher le tableau
+
+            System.out.println("1|2|3|4|5|6|7|");
+            System.out.println("___________________________-");
+            for (l = nbl-1; l >= 0; l--) {
+                for (c = 0; c <= nbc-1; c++) {
+                    System.out.print(board[l][c] + "|");
+                }
+                System.out.println();
+            }
+            System.out.println("");
+
+
+            if (win==true) {
+                System.out.println("Andthewinneris" + currentPlayer);
+            }
+
+        }
+    }
 
     // Test ligne (fonction)
 
@@ -44,8 +106,21 @@ public class Main {
             sumResult = (board1[l][i] == currentPlayer) ? sumResult + 1 : 0;
         }
 
-        return sumResult == 4;
+        return sumResult == ruleCoins;
+
+        System.out.println("l"+l);
+        System.out.println("c"+c);
+
+        System.out.println("boardlength"+((board1.length)-1));
+
+        System.out.println("testc"+testc);
+        System.out.println("l"+l);
+        System.out.println("currentPlayer"+currentPlayer);
+        System.out.println("rulecoins"+ruleCoins);
+        System.out.println("sumresult"+sumResult);
+
     }
+
     // Test colonne (fonction)
 
     private static boolean testcolonne(int c, int ruleCoins, int l, char currentPlayer, char[][] board1) {
@@ -83,6 +158,7 @@ public class Main {
         }
         return sumResult == ruleCoins;
     }
+
     // Test diagonale descendante(fonction)
 
     private static boolean testdiagonaledescendante(int c, int ruleCoins, int l, char currentPlayer, char[][] board1) {
@@ -103,9 +179,11 @@ public class Main {
 
         return sumResult == ruleCoins;
     }
-    // afficher le tableau
 
-    // Victoire ou non ? (si non: changement de joueur)
+
+
+
+
 
 }
 
